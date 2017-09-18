@@ -3,3 +3,7 @@ build/**
 out/**
 target/**
 !/.gitignore
+
+
+# Intelij Project File
+RobocodeV1.iml

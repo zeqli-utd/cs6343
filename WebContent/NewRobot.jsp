@@ -5,7 +5,7 @@
 <%
 	ResultSet resultset = null;
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,15 +27,84 @@
 	href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
 	rel="stylesheet" type="text/css">
 <style>
-        #RobotCode { 
-                position: absolute;
-                top: 200px;
-                right: 0;
-                bottom: 0;
-                left: 0;
-            }
-    </style>
+    #RobotCode { 
+      position: absolute;
+      top: 200px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    
+    body{
+      min-height: 2000px;
+      padding-top: 200px;
+    }
+</style>
 </head>
+
+<script type="text/javascript">
+
+    // Get Robot by user
+		function getDomains() {
+
+			var x = document.getElementById("domain_name").value;
+			
+			$.ajax({
+				url : "GetrobotDomain",
+				data : "tenant_name=" + x + "",
+				type : 'POST',
+				async : false,
+				success : function(html) {
+					console.log("html:" + html);
+					$("#package").html(html);
+				},
+				error : function(html) {
+					console.log("error html:" + html);
+				}
+			});
+		}
+		
+		function newRobot(){
+			var robotPackage = document.getElementById("package").value;
+			var name = document.getElementById("robo_name").value;
+			var user = document.getElementById("domain_name").value;
+			$.ajax({
+				url: 'newRobot',
+				type: 'POST',
+				data: {
+					'package': robotPackage,
+					'name': name,
+					'user': user
+				},
+				async : false,
+				success : function(html) {
+					console.log(html);
+					window.location.replace("NewRobot2.jsp"); 
+				}
+			});
+			event.preventDefault();
+		}
+		
+		
+		function getRobots() {
+
+			var x = document.getElementById("package").value;
+			//alert("x value:"+x);
+			$.ajax({
+				url : "getrobots",
+				data : "domain_name=" + x + "",
+				type : 'POST',
+				async : false,
+				success : function(html) {
+					console.log("html:" + html);
+					$("#displayrobots").html(html);
+				},
+				error : function(html) {
+					console.log("error html:" + html);
+				}
+			});
+		}
+</script>
 
 <body>
 <%@include file="includes/header.jsp" %>
@@ -53,10 +122,8 @@
 			</div>
 			</div> -->
 			<!-- /.row -->
-			<br><br><br><br>
-			<div class="row">
+			<div class="container">
 				<div class="col-lg-6">
-<!--  <form method="post" action="editservlet"> -->
 					<div class="input-group">
 						<%
 							Set<String> list_of_tenants = new HashSet<String>();
@@ -76,30 +143,12 @@
 											.executeQuery(selectString);
 									
 											%>
-<script type="text/javascript">
-		function getDomains() {
+											<h1>New Robot</h1>
+											<div class="form-group">
+												<label>Select User</label>
+												<select name="domain_name" id="domain_name" class="form-control" onchange="getDomains()">
+												<option>Select User</option>
 
-			var x = document.getElementById("domain_name").value;
-			
-			$.ajax({
-				url : "GetrobotDomain",
-				data : "tenant_name=" + x + "",
-				type : 'POST',
-				async : false,
-				success : function(html) {
-					console.log("html:" + html);
-					$("#package").html(html);
-				},
-				error : function(html) {
-					console.log("error html:" + html);
-				}
-			});
-		}	
-		</script>	<br><br><h1>New Robot</h1><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<label>Select User</label>
-						<select name="domain_name" id="domain_name" class="form-control" onchange="getDomains()"
-							>
-							<option>Select User</option>
 
 							<%
 									while (resultset.next()) {
@@ -142,81 +191,42 @@
 							<option value="<%=key%>"><%=key%></option>
 							<%
 								}
+								} catch (Exception e) {
+									out.println("wrong entry" + e);
+								}
 							session.setAttribute("tenantMap", map);
 							session.setAttribute("DomainMap", domain_robot_map);
 							session.setAttribute("userx", "User");
 								%>
-						</select> <br /> 
-						<script type="text/javascript">
-		function getRobots() {
-
-			var x = document.getElementById("package").value;
-			//alert("x value:"+x);
-			$.ajax({
-				url : "Getrobots",
-				data : "domain_name=" + x + "",
-				type : 'POST',
-				async : false,
-				success : function(html) {
-					console.log("html:" + html);
-					$("#displayrobots").html(html);
-				},
-				error : function(html) {
-					console.log("error html:" + html);
-				}
-			});
-		}	
-		</script>		&nbsp;&nbsp;&nbsp;&nbsp;<label>Select Package</label>
-						<select name="package" id="package" class="form-control"
-							onchange="getRobots()" >
-							
-							<option>Select Package</option>
+						</select>
+						</div> <!-- /.form-group -->
 						
+						<div class="form-group">
+							<label>Select Package</label>
+							<select name="package" id="package" class="form-control" onchange="getRobots()" >
+								<option>Select Package</option>
+							</select> 
+						</div>
+
+
+						
+						<div><label>Enter Robot Name.</label></div>
+						<div><label>Example: MyFirstRobot. Must not contain spaces.</label></div>
+						
+						<div class="form-group row">
+							<label for="robo_name" class="col-sm-4 control-label"> Robot Name:</label>
+      					<div class="col-sm-8">
+        					<input type="text"  class="form-control" name="roboName" id="robo_name" >
+      					</div>
+    				</div>
+    				<div class="form-group">
+    					<button type="submit" data-uname="newRobotSubmit" class="btn btn-success" id="create" onclick="newRobot();">Next</button>
+    				</div>
+    				
+    										</div> <!-- .input-group -->
 								
-						</select> <br /> 
-							<%} catch (Exception e) {
-									out.println("wrong entry" + e);
-								}
-							%>
-
-						</div>
-						
-						&nbsp;&nbsp;&nbsp;&nbsp;<label>Enter Robot Name. Example: MyFirstRobot. Must not contain spaces.</label>
-					    <br>
-						&nbsp;&nbsp;&nbsp;&nbsp;<label> Robot Name: </label> &nbsp;&nbsp;&nbsp;&nbsp;<input width="200px" name="roboName" id="robo_name"
-								type="text" class="fa-la"/>
-						
-						</div>
-						</div>
-						<br>
-						<script type="text/javascript">
-				 function NewRobot(){
-						var robotPackage=document.getElementById("package").value;
-			        	 var name = document.getElementById("robo_name").value;
-			        	 var user = document.getElementById("domain_name").value;
-			            $.ajax({
-			                url: 'newRobot',
-			                type: 'POST',
-			                data: "RobotInfo="+robotPackage+"-"+name+"-"+user,
-			                async : false,
-			                success : function(html) {
-			    				console.log(html);
-			    				window.location.replace("NewRobot2.jsp"); 
-			                }
-			            });  
-			        	event.preventDefault();
-			        	}
-				 </script>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="submit" class="btn btn-success" id="create" onclick="NewRobot();">Next</button>
-					</form>
-				</div>
-				<!-- /.col-lg-6 (nested) -->
-			</div>
-			<!-- /.row (nested) -->
-		</div>
+							</div> <!-- /.col-lg-6 (nested) -->
+						</div> <!-- /.container (nested) -->
 		<!-- /.panel-body -->
-	</div>
-
-</body>
+	</body>
 </html>

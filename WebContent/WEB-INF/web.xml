@@ -408,7 +408,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Getrobots</servlet-name>
-    <url-pattern>/Getrobots</url-pattern>
+    <url-pattern>/getrobots</url-pattern>
   </servlet-mapping>  
      <servlet>
     <servlet-name>Getrobots2</servlet-name>

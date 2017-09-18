@@ -66,24 +66,22 @@ import DTO.UserDTO;
 //@WebServlet("/createrobot")
 public class NewRobotServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private static final String PACKAGE = "package";
+	private static final String NAME = "name";
+	private static final String USER = "user";
+	
 	Connection connection = null;
 	PreparedStatement ptmt = null;
 	ResultSet resultSet = null;
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String selectedItem = null;
 		HttpSession session = request.getSession();
-		System.out.println(request.getParameter("RobotInfo"));
-		if (request.getParameter("RobotInfo") != null) {
-			selectedItem = request.getParameter("RobotInfo");
-		}
-		String[] words = selectedItem.split("-");
-		System.out.println(words[0] +" "+words[1]);
-		String robotPackage =words[0];
-		String name = words[1];
-		String user = words[2];
+		
+		String robotPackage = request.getParameter(PACKAGE);
+		String name = request.getParameter(NAME);
+		String user = request.getParameter(USER);
 		name=name.trim();
 		session.setAttribute("roboName",name);
 		request.setAttribute("roboName",name);

@@ -4,7 +4,6 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<link href="css/style_header.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
@@ -59,7 +58,7 @@
 				<li class="dropdown"><a href="#new">New</a>
 					<ul class="dropdown-menu">
 						<li><a href="NewRobot.jsp">Robot</a></li>
-						<li><a href="#CUser">User</a></li>
+						<li><a href="newUser.jsp">User</a></li>
 						<li><a href="#CDomain">Domain</a></li>
 						<li><a href="#CRole">Role</a></li>
 					</ul></li>
@@ -81,7 +80,7 @@
 				<li class="page-scroll"><a href="PlayBattle.jsp">Play Battle!</a></li>
 				<li class="page-scroll"><a href="#view">Settings</a></li>
 				<li class="page-scroll"><a href="#view"><img
-						class="img-responsive" src="img/power button.png" alt=""
+						class="img-responsive" src="img/power_button.png" alt=""
 						ALIGN="RIGHT" hspace="1">Logout</a></li>
 			</ul>
 		</div>

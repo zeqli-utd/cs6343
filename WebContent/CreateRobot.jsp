@@ -84,7 +84,7 @@
 				<li class="page-scroll"><a href="#play">Play Battle!</a></li>
 				<li class="page-scroll"><a href="#view">Settings</a></li>
 				<li class="page-scroll"><a href="#view"><img
-						class="img-responsive" src="img/power button.png" alt=""
+						class="img-responsive" src="img/power_button.png" alt=""
 						ALIGN="RIGHT" hspace="5">Logout</a></li>
 			</ul>
 		</div>
