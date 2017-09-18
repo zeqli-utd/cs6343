@@ -17,7 +17,7 @@
 	String packageName = objRobot.getPackageId();
 	System.out.println(robotname +" "+packageName);
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,6 +46,11 @@
                 bottom: 0;
                 left: 0;
             }
+            
+            #editor {
+    /** Setting height is also important, otherwise editor wont showup**/
+    height: 300px;
+}
     </style>
 </head>
 
@@ -229,10 +234,70 @@ public class <%=robotname%> extends Robot{
 }
     </textarea>
 	<textarea id="textArea" name="textArea"></textarea>
+	<div id="aceEditor" >
+	
+package <%=packageName%>;
+
+import robocode.*;
+import robocode.HitByBulletEvent;
+import robocode.Robot;
+import robocode.ScannedRobotEvent;
+//import java.awt.Color;
+
+// API help: http://robocode.sourceforge.net/docs/robocode/robocode/Robot.html
+
+/**
+ * <%=robotname%>- a robot by <%=session.getAttribute("userx")%>
+ */
+public class <%=robotname%> extends Robot{
+	/**
+	 * run: <%=robotname%>default behavior
+	 */
+	public void run() {
+	// Initialization of the robot should be put here
+
+	// After trying out your robot, try uncommenting the import at the top,
+	// and the next line:
+
+	// setColors(Color.red,Color.blue,Color.green); // body,gun,radar
+
+	// Robot main loop
+		while(true) {
+			// Replace the next 4 lines with any behavior you would like
+			ahead(100);
+			turnGunRight(360);
+			back(100);
+			turnGunRight(360);
+		}
+	}
+	/**
+	 * onScannedRobot: What to do when you see another robot
+	 */
+	public void onScannedRobot(ScannedRobotEvent e) {
+		// Replace the next line with any behavior you would like
+		fire(1);
+	}
+
+	/**
+	 * onHitByBullet: What to do when you're hit by a bullet
+	 */
+	public void onHitByBullet(HitByBulletEvent e) {
+		// Replace the next line with any behavior you would like
+		back(10);
+	}
+	
+	/**
+	 * onHitWall: What to do when you hit a wall
+	 */
+	public void onHitWall(HitWallEvent e) {
+		// Replace the next line with any behavior you would like
+		back(20);
+	}	
+}</div>
 	</form>
-    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script>
-        var editor = ace.edit("RobotCode");
+        var editor = ace.edit("aceEditor");
         editor.setTheme("ace/theme/clouds");
         editor.getSession().setMode("ace/mode/java");
         var undo=new ace.UndoManager();

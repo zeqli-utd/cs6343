@@ -213,7 +213,7 @@
 			var x = document.getElementById("package").value;
 			//alert("x value:"+x);
 			$.ajax({
-				url : "Getrobots",
+				url : "getrobots",
 				data : "domain_name=" + x + "",
 				type : 'POST',
 				async : false,
@@ -283,7 +283,7 @@
        
     </div>
 
-    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script>
         var editor = ace.edit("RobotCode");
         editor.setTheme("ace/theme/clouds");

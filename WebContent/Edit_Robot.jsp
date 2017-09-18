@@ -253,7 +253,7 @@ function onloadPage(){
 			var x = document.getElementById("package").value;
 			//alert("x value:"+x);
 			$.ajax({
-				url : "Getrobots",
+				url : "getrobots",
 				data : "domain_name=" + x + "",
 				type : 'POST',
 				async : false,
