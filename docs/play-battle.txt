@@ -1,0 +1,16 @@
+Robots:
+
+User > Package > Robots > Selected Robots
+
+Rules:
+
+1. Number of Rounds: (0, +INFINITE)
+2.Gun Cooling Rate: (0, 0.7)
+3.Inactivity Time: [0, +INFINITE)
+4.Sentry Border Size: [50, +INFINITE]
+5.Hide Enemy Names: y/n
+
+
+
+
+

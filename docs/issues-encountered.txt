@@ -1,0 +1,93 @@
+RoboCode
+1. First Compiled applet throws error
+    SYSTEM: Could not load simple.Fire : java.security.AccessControlException: access denied ("java.util.PropertyPermission" "NOSECURITY" "read")
+
+2. 
+
+
+
+Web Module
+Path - 
+Document Base - 
+Module 
+
+
+grant ${catalina.base}/webapps/cs6343/applet7.jar
+
+
+http://localhost:8080/RobocodeV1/applet7.jar
+
+
+
+
+SecurityManager manager = System.getSecurityManager();
+
+// Robocode 权限
+if (manager != null) {
+
+    // RobotClassLoader
+    manager.checkPermission(new RuntimePermission("createClassLoader"));
+
+    // Exit Robocode Applet
+    manager.checkPermission(new RuntimePermission("exitVM.0"));
+
+    manager.checkPermission(new Permission("java.util.PropertyPermission", "NOSECURITY", "read"))
+}
+
+
+https://stackoverflow.com/a/22350931/2802664
+Paths.get(".").toAbsolutePath().normalize().toString();
+
+
+Method I tried:
+1. Add permission tag:
+    <applet> ...
+      <param name="permissions" value="all-permissions" />
+    </applet>
+
+  outcome: Application Blocked. User has denied the privileges to the code.
+
+
+
+2. Sign my jar
+  $ keytool -genkey -keystore myKeyStore -alias robo
+
+  ./myKeyStore will be our self certificate 
+  
+  $ keytool -selfcert -keystore myKeyStore -alias robo
+
+  $ jarsigner -keystore myKeyStore build/applet7.jar robo
+
+
+3. Add file to exception list
+
+[x] file:///c:/Users/zeqing/git/cs6343/WebContent/RoboCode-Applet/fwdforce_com/appweb/WebContent/test.html
+[x] file:///C:/Users/zeqing/git/cs6343/WebContent/RoboCode-Applet/fwdforce_com/appweb/WebContent/applet7.jar
+
+[x] file://c:\Users\zeqing\git\cs6343\WebContent\RoboCode-Applet\fwdforce_com\appweb\WebContent\test.html
+[x] file://C:\Users\zeqing\git\cs6343\WebContent\RoboCode-Applet\fwdforce_com\appweb\WebContent\applet7.jar
+
+
+file:/c:/Users/zeqing/git/cs6343/WebContent/RoboCode-Applet/fwdforce_com/appweb/WebContent/test.html
+file:/c:/Users/zeqing/git/cs6343/WebContent/RoboCode-Applet/fwdforce_com/appweb/WebContent/applet7.html
+
+4. Change policy by passing VM argument
+https://stackoverflow.com/questions/18669132/java-unsigned-applet-passing-vm-argument-java-security-policy-is-ignored
+
+  -Djava.security.policy==my.policy
+
+
+  java -Djava.security.manager
+    -Djava.security.policy=exampleraypolicy
+    -cp sCount.jar Count C:\TestData\data
+
+
+  <param name="java_arguments" value="-J-Djava.security.policy==my.policy"/>
+
+
+
+  Problem Explain：
+  https://docs.oracle.com/javase/tutorial/deployment/applet/security.html
+
+https://docs.oracle.com/javase/tutorial/deployment/applet/html.html
+  permissions indicates if the applet runs in the security sandbox. Specify "sandbox" for the value to run in the sandbox. Specify "all-permissions" to run outside the sandbox. If the permissions parameter is not present, signed applets default to "all-permissions" and unsigned applets default to "sandbox".

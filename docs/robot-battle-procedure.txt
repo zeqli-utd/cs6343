@@ -1,0 +1,11 @@
+1. Get Battle Properties
+
+2. Start New Battle
+
+    2.1 Create Battling Robots List
+    2.2 Get Robot Repository Manager
+    2.3 Create Robot Spec, give the name only
+    2.4 Add new RobotSpec into Battling Robots List
+
+
+    

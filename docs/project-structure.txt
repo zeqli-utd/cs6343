@@ -1,0 +1,254 @@
+Folder PATH listing
+Volume serial number is 000000F5 5A56:4967
+C:.
+|   out.txt
+|   
++---appweb
+|   |   .classpath
+|   |   .project
+|   |   strawberry.jpg
+|   |            
+|   +---src
+|   |   |   battle
+|   |   |   
+|   |   +---appletComponentArch
+|   |   |       DynamicTree.java
+|   |   |       DynamicTreeApplet.java
+|   |   |       DynamicTreePanel.java
+|   |   |       
+|   |   +---robocode
+|   |   |   |   AdvancedRobot.java
+|   |   |   |   Bullet.java
+|   |   |   |   BulletHitBulletEvent.java
+|   |   |   |   BulletHitEvent.java
+|   |   |   |   BulletMissedEvent.java
+|   |   |   |   Condition.java
+|   |   |   |   CustomEvent.java
+|   |   |   |   DeathEvent.java
+|   |   |   |   Droid.java
+|   |   |   |   DynamicTree.java
+|   |   |   |   DynamicTreeApplet.java
+|   |   |   |   DynamicTreePanel.java
+|   |   |   |   Event.java
+|   |   |   |   GunTurnCompleteCondition.java
+|   |   |   |   HitByBulletEvent.java
+|   |   |   |   HitRobotEvent.java
+|   |   |   |   HitWallEvent.java
+|   |   |   |   MessageEvent.java
+|   |   |   |   MoveCompleteCondition.java
+|   |   |   |   package.html
+|   |   |   |   RadarTurnCompleteCondition.java
+|   |   |   |   Robocode.java (Modified)
+|   |   |   |   Robocode1.java
+|   |   |   |   RobocodeFileOutputStream.java
+|   |   |   |   RobocodeFileWriter.java
+|   |   |   |   Robot.java
+|   |   |   |   RobotDeathEvent.java
+|   |   |   |   Rules.java
+|   |   |   |   ScannedRobotEvent.java
+|   |   |   |   SkippedTurnEvent.java
+|   |   |   |   TeamRobot.java
+|   |   |   |   TurnCompleteCondition.java
+|   |   |   |   WinEvent.java
+|   |   |   |   _AdvancedRadiansRobot.java
+|   |   |   |   _AdvancedRobot.java
+|   |   |   |   _Robot.java
+|   |   |   |   
+|   |   |   +---battle
+|   |   |   |   |   Battle.java (Modified, TODO)
+|   |   |   |   |   BattleProperties.java
+|   |   |   |   |   BattleRankingTableModel.java
+|   |   |   |   |   BattleResultsTableModel.java
+|   |   |   |   |   
+|   |   |   |   |       
+|   |   |   |   \---record
+|   |   |   |           BattleRecord.java
+|   |   |   |           BulletRecord.java
+|   |   |   |           RobotRecord.java
+|   |   |   |           RoundRecord.java
+|   |   |   |           TurnRecord.java
+|   |   |   |               
+|   |   |   +---battlefield
+|   |   |   |       BattleField.java
+|   |   |   |       DefaultBattleField.java  
+|   |   |   |           
+|   |   |   +---battleview
+|   |   |   |   |   BattleView.java
+|   |   |   |   |   MirroredGraphics.java
+|   |   |   |           
+|   |   |   +---control
+|   |   |   |       BattlefieldSpecification.java
+|   |   |   |       BattleSpecification.java
+|   |   |   |       package.html
+|   |   |   |       RobocodeEngine.java
+|   |   |   |       RobocodeListener.java
+|   |   |   |       RobotResults.java
+|   |   |   |       RobotSpecification.java
+|   |   |   |           
+|   |   |   |       
+|   |   |   +---dialog
+|   |   |   |   |   AboutBox.java
+|   |   |   |   |   AvailableRobotsPanel.java
+|   |   |   |   |   ConsoleDialog.java
+|   |   |   |   |   ConsoleScrollPane.java
+|   |   |   |   |   NewBattleBattleFieldTab.java
+|   |   |   |   |   NewBattleDialog.java
+|   |   |   |   |   NewBattleRulesTab.java
+|   |   |   |   |   PreferencesCommonOptionsTab.java
+|   |   |   |   |   PreferencesDevelopmentOptionsTab.java
+|   |   |   |   |   PreferencesDialog.java
+|   |   |   |   |   PreferencesRenderingOptionsTab.java
+|   |   |   |   |   PreferencesSoundOptionsTab.java
+|   |   |   |   |   PreferencesViewOptionsTab.java
+|   |   |   |   |   RankingDialog.java
+|   |   |   |   |   ResultsDialog.java
+|   |   |   |   |   ResultsTableCellRenderer.java
+|   |   |   |   |   RobocodeFrame.java
+|   |   |   |   |   RobocodeMenuBar.java
+|   |   |   |   |   RobotButton.java
+|   |   |   |   |   RobotDescriptionPanel.java
+|   |   |   |   |   RobotDialog.java
+|   |   |   |   |   RobotExtractor.java
+|   |   |   |   |   RobotSelectionPanel.java
+|   |   |   |   |   SplashScreen.java
+|   |   |   |   |   TeamCreator.java
+|   |   |   |   |   TeamCreatorOptionsPanel.java
+|   |   |   |   |   WindowPositionManager.java
+|   |   |   |   |   WindowUtil.java
+|   |   |   |   |   Wizard.java
+|   |   |   |   |   WizardCardPanel.java
+|   |   |   |   |   WizardController.java
+|   |   |   |   |   WizardListener.java
+|   |   |   |   |   WizardPanel.java
+|   |   |   |   |   WizardTabbedPane.java
+|   |   |   |           
+|   |   |   +---editor
+|   |   |   |   |   CompilerPreferencesDialog.java
+|   |   |   |   |   CompilerProperties.java
+|   |   |   |   |   EditWindow.java
+|   |   |   |   |   FindReplaceDialog.java
+|   |   |   |   |   JavaDocument.java
+|   |   |   |   |   Keywords.java
+|   |   |   |   |   LineNumbers.java
+|   |   |   |   |   MoreWindowsDialog.java
+|   |   |   |   |   RobocodeCompiler.java
+|   |   |   |   |   RobocodeCompilerFactory.java
+|   |   |   |   |   RobocodeEditor.java
+|   |   |   |   |   RobocodeEditorKit.java
+|   |   |   |   |   RobocodeEditorMenuBar.java
+|   |   |   |   |   RobocodeView.java
+|   |   |   |   |   RobocodeViewFactory.java
+|   |   |   |   |   SegmentInputStream.java
+|   |   |   |   |   WindowMenuItem.java
+|   |   |   |           
+|   |   |   +---exception
+|   |   |   |   |   DeathException.java
+|   |   |   |   |   DisabledException.java
+|   |   |   |   |   EventInterruptedException.java
+|   |   |   |   |   RobotException.java
+|   |   |   |   |   WinException.java
+|   |   |   |           
+|   |   |   +---io
+|   |   |   |   |   BufferedPipedInputStream.java
+|   |   |   |   |   BufferedPipedOutputStream.java
+|   |   |   |   |   FileTypeFilter.java
+|   |   |   |   |   FileUtil.java
+|   |   |   |   |   Logger.java
+|   |   |   |   |   NoDuplicateJarOutputStream.java
+|   |   |   |   |   RobocodeObjectInputStream.java
+|   |   |   |   |   TeamMessageSizer.java
+|   |   |   |           
+|   |   |   +---manager
+|   |   |   |   |   BattleManager.java
+|   |   |   |   |   BrowserManager.java
+|   |   |   |   |   CpuManager.java
+|   |   |   |   |   ImageManager.java
+|   |   |   |   |   NameManager.java
+|   |   |   |   |   RobocodeManager.java
+|   |   |   |   |   RobocodeProperties.java
+|   |   |   |   |   RobotDialogManager.java
+|   |   |   |   |   RobotRepositoryManager.java
+|   |   |   |   |   ThreadManager.java
+|   |   |   |   |   VersionManager.java
+|   |   |   |   |   WindowManager.java 
+|   |   |   |           
+|   |   |   +---packager
+|   |   |   |   |   ClassAnalyzer.java
+|   |   |   |   |   ConfirmPanel.java
+|   |   |   |   |   FilenamePanel.java
+|   |   |   |   |   PackagerOptionsPanel.java
+|   |   |   |   |   RobotPackager.java   
+|   |   |   |           
+|   |   |   +---peer
+|   |   |   |   |   BulletPeer.java
+|   |   |   |   |   ContestantPeer.java
+|   |   |   |   |   ContestantStatistics.java
+|   |   |   |   |   ExplosionPeer.java
+|   |   |   |   |   RobotPeer.java
+|   |   |   |   |   TeamPeer.java
+|   |   |   |   |   TeamStatistics.java
+|   |   |   |   |   TextPeer.java
+|   |   |   |   |   
+|   |   |   |   \---robot
+|   |   |   |           EventManager.java
+|   |   |   |           EventQueue.java
+|   |   |   |           NameStuff.jpage
+|   |   |   |           RobotClassManager.java
+|   |   |   |           RobotFileSystemManager.java
+|   |   |   |           RobotMessageManager.java
+|   |   |   |           RobotOutputStream.java
+|   |   |   |           RobotStatistics.java
+|   |   |   |           RobotThreadManager.java
+|   |   |   |               
+|   |   |   +---render
+|   |   |   |       ImageUtil.java
+|   |   |   |       RenderImage.java
+|   |   |   |       RenderObject.java
+|   |   |   |       RobocodeLogo.java
+|   |   |   |           
+|   |   |   +---repository
+|   |   |   |       ClassSpecification.java
+|   |   |   |       FileSpecification.java
+|   |   |   |       FileSpecificationDatabase.java
+|   |   |   |       JarSpecification.java
+|   |   |   |       Repository.java
+|   |   |   |       RobotSpecification.java
+|   |   |   |       TeamSpecification.java
+|   |   |   |           
+|   |   |   +---security
+|   |   |   |       RobocodeClassLoader.java (Modified)
+|   |   |   |       RobocodePermission.java
+|   |   |   |       RobocodeSecurityManager.java
+|   |   |   |       RobocodeSecurityPolicy.java
+|   |   |   |       SecureInputStream.java
+|   |   |   |       SecurePrintStream.java
+|   |   |   |           
+|   |   |   +---sound
+|   |   |   |       SoundCache.java
+|   |   |   |       SoundManager.java
+|   |   |   |           
+|   |   |   +---text
+|   |   |   |       LimitedClassnameDocument.java
+|   |   |   |       LimitedDocument.java
+|   |   |   |       StringUtil.java 
+|   |   |   |           
+|   |   |   \---util
+|   |   |           BoundingRectangle.java
+|   |   |           GraphicsState.java
+|   |   |           LogUtil.java
+|   |   |           package.html
+|   |   |           Utils.java   
+|   |   |               
+|   |   \---sample
+|   |           Corners.java
+|   |           Crazy.java
+|   |           Fire.java
+|   |           MyFirstRobot.java
+|   |           RamFire.java
+|   |           SittingDuck.java
+|   |           SpinBot.java
+|   |           Target.java
+|   |           Tracker.java
+|   |           TrackFire.java
+|   |           Walls.java
+|   |           
