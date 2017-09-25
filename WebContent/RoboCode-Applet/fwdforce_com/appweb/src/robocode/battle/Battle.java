@@ -217,6 +217,7 @@ public class Battle implements Runnable {
 		}
 
 		// Load robots
+		log("Load Robots...");
 		initialize();
 
 		deterministic = true;
@@ -239,6 +240,7 @@ public class Battle implements Runnable {
 			battleRecord = isRecordingEnabled ? new BattleRecord(battleField, robots) : null;
 		}
 
+		/* Core Battle Logic Here */
 		while (!abortBattles && roundNum < numRounds) {
 			updateTitle();
 			try {
@@ -463,6 +465,7 @@ public class Battle implements Runnable {
 	}
 
 	public void initialize() {
+	    log("Initialize Battle...");
 		setOptions();
 
 		RobocodeProperties props = manager.getProperties();
@@ -508,19 +511,22 @@ public class Battle implements Runnable {
 		// Pre-load robot classes without security...
 		// loadClass WILL NOT LINK the class, so static "cheats" will not work.
 		// in the safe robot loader the class is linked.
+
 		synchronized (robots) {
 			for (RobotPeer r : robots) {
 				try {
-					Class<?> c;
+					Class<?> c;log("-2");
 
-					RobotClassManager classManager = r.getRobotClassManager();
+					RobotClassManager classManager = r.getRobotClassManager();log("-1");
 					String className = classManager.getFullClassName();
-					
-					LogUtil.log("className " + className);
-					LogUtil.log("security " + RobotClassManager.isSecutityOn());
+					log("className " + className);
+//					log("security " + RobotClassManager.isSecutityOn());
 					RobocodeClassLoader classLoader = classManager.getRobotClassLoader();
+					
+					//TODO Change here
 					c = classLoader.loadSampleRobotClass(className, true);
-					LogUtil.log((c==null) + " class loader");
+					log((c==null) + " class loader");
+                    log("4");
 					
 					/*if (RobotClassManager.isSecutityOn()) {
 						c = classLoader.loadRobotClass(className, true);
@@ -529,8 +535,10 @@ public class Battle implements Runnable {
 					}*/
 
 					classManager.setRobotClass(c);
+                    log("5");
 
 					r.getRobotFileSystemManager().initializeQuota();
+                    log("6");
 
 					Class<?>[] interfaces = c.getInterfaces();
 
@@ -546,6 +554,8 @@ public class Battle implements Runnable {
 						battleView.update();
 					}
 				} catch (Throwable e) {
+				    log("SYSTEM: Could not load " + r.getName() + " : " + e, e);
+				    
 					r.out.println("SYSTEM: Could not load " + r.getName() + " : " + e);
 					e.printStackTrace(r.out);
 				}
@@ -594,6 +604,9 @@ public class Battle implements Runnable {
 		}
 	}
 
+	/**
+	 * Play Rounds 
+	 */
 	public void runRound() {
 		log("Let the games begin!");
 		System.out.println("Let the games begin!");

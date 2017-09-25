@@ -41,7 +41,7 @@ import robocode.packager.ClassAnalyzer;
 import robocode.peer.robot.RobotClassManager;
 import robocode.repository.RobotSpecification;
 import robocode.util.LogUtil;
-import sun.plugin.cache.JarCacheUtil;
+//import sun.plugin.cache.JarCacheUtil;
 
 
 /**
@@ -100,11 +100,14 @@ public class RobocodeClassLoader extends ClassLoader {
 		}
 	}
 	public synchronized Class<?> loadSampleRobotClass(String name, boolean toplevel) throws ClassNotFoundException {
-		LogUtil.log(name);
-		Class c = Class.forName(name);
-		LogUtil.log("robot  class "+ (c == null));
+		log("RobocodeClassLoader > loadSampleRoboClass() " + name);
+		Class<?> c = Class.forName(name);
+		log("robot class loaded "+ (c != null ? "successfully" : "failed"));
 		return c;
-	}public synchronized Class<?> loadSampleRobotClass1(String name, boolean toplevel) throws ClassNotFoundException {
+	}
+	
+	
+	public synchronized Class<?> loadSampleRobotClass1(String name, boolean toplevel) throws ClassNotFoundException {
 		LogUtil.log("In sample class loader");
 		String filename = name.replace('.', '/') + ".class";
 		//ClassLoader classLoader = new URLClassLoader(new URL[]{FileUtil.getUrl()});
@@ -155,11 +158,13 @@ public class RobocodeClassLoader extends ClassLoader {
 	      
 		return c1;
 	}
+	
 	public synchronized Class<?> loadRobotClass(String name, boolean toplevel) throws ClassNotFoundException {
 		LogUtil.log("In load robot class " + name);
 		return loadSampleRobotClass(name, toplevel);
 	}
-		public synchronized Class<?> loadRobotClass1(String name, boolean toplevel) throws ClassNotFoundException {
+		
+	public synchronized Class<?> loadRobotClass1(String name, boolean toplevel) throws ClassNotFoundException {
 			
 		if (cachedClasses.containsKey(name)) {
 			return cachedClasses.get(name);
@@ -175,8 +180,7 @@ public class RobocodeClassLoader extends ClassLoader {
 
 		if (!name.equals(robotClassManager.getFullClassName())) {
 			if (robotClassManager.getRootPackage() == null) {
-				log(
-						robotClassManager.getFullClassName() + " is not in a package, but is trying to reference class "
+				log(robotClassManager.getFullClassName() + " is not in a package, but is trying to reference class "
 						+ name);
 				log("To do this in Robocode, you must put your robot into a package.");
 				throw new ClassNotFoundException(

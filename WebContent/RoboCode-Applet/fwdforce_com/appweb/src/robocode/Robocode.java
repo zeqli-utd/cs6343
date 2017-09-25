@@ -28,11 +28,16 @@ package robocode;
 
 
 import java.net.URL;
+import java.nio.file.Paths;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+import java.util.PropertyPermission;
 
 import javax.swing.JApplet;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import netscape.javascript.JSException;
 import netscape.javascript.JSObject;
 
 import appletComponentArch.DynamicTreePanel;
@@ -47,7 +52,10 @@ import robocode.security.RobocodeSecurityManager;
 import robocode.security.RobocodeSecurityPolicy;
 import robocode.security.SecureInputStream;
 import robocode.security.SecurePrintStream;
+import robocode.util.Constants;
 import robocode.util.LogUtil;
+import robocode.util.StringUtils;
+import robocode.vo.BattleVO;
 
 
 /**
@@ -74,9 +82,11 @@ public class Robocode extends JApplet{
 	 */
 	public static void main(String[] args) {
 
-		Robocode robocode = new Robocode();
-		robocode.initialize(new String[0]);
+//		Robocode robocode = new Robocode();
+//		robocode.initialize(new String[0]);
 	}
+	
+	
 	@Override
 	public void init() {
 		 setSize( 800, 600);
@@ -97,36 +107,116 @@ public class Robocode extends JApplet{
         }
 	}
 	public Robocode() {}
-	@Override
+	
+	@SuppressWarnings("unchecked")
+    @Override
 	public void start() {
-		Robocode robocode = new Robocode();
+//		Robocode robocode = new Robocode();
+	    
+	    AccessController.doPrivileged((PrivilegedAction) () -> {
+            // privileged code goes here, for example:
+            System.out.println("Current Working Directory");
+            System.out.println(Paths.get(".").toAbsolutePath().normalize().toString());
+            return null; // nothing to return
+        });
+
+//	    // Check Applet Permission
+//
+//	    SecurityManager manager = System.getSecurityManager();
+//
+//	    if (manager != null) {
+//
+//	        try {
+//	        // RobotClassLoader
+//	        manager.checkPermission(new RuntimePermission("createClassLoader"));
+//
+//	        // Exit Robocode Applet
+//	        manager.checkPermission(new RuntimePermission("exitVM.0"));
+//
+//	        manager.checkPermission(new PropertyPermission("NOSECURITY", "read"));
+//	        } catch (SecurityException e) {
+//	            e.printStackTrace(System.out);
+//	        }
+//	    }
     	
 		URL url = getDocumentBase();
 		FileUtil.setUrl(getCodeBase());
 		
-		JSObject window = JSObject.getWindow(this);
+		/* The browser window object */
+		JSObject window = null;
+		try {
+		    window = JSObject.getWindow(this); 
+		} catch (JSException e) {
+		    System.out.println(e.getMessage());
+		}
         String summary = "hello world";
         LogUtil.setWindow(window);
         LogUtil.log(summary);
+        LogUtil.aLog(summary);
         LogUtil.log("codebase url:: " + url.getFile());
-		System.out.println(url.getFile());
-		JPanel newContentPane = robocode.initialize(new String[0]); 
+        LogUtil.log(url.getFile());
+        
+        BattleVO battleMeta = (BattleVO)window.eval("getBattleInfo()");
+		JPanel newContentPane = initialize(new String[0], battleMeta); 
 		setContentPane(newContentPane); 
 	}
-	public JPanel initialize(String args[]) {
+	
+	/**
+	 * Initialize Robocode 
+	 * @param args
+	 * @return
+	 */
+	public JPanel initialize(String args[], BattleVO battleInfo) {
+	    
+
 		try {
 			manager = new RobocodeManager(false, null);
 
 			Thread.currentThread().setName("Application Thread");
-
-			
-
-
-			
-	
+	        
+	        
+			/* Set Battle Specifications */
 			BattleProperties battleProperties = manager.getBattleManager().getBattleProperties();
-			battleProperties.setSelectedRobots("sample.Corners,sample.Fire");
-			manager.getBattleManager().startNewBattle(battleProperties, true, false);
+			
+			String selectedRobots = null;
+			if (battleInfo != null) {
+			    selectedRobots = StringUtils.defaultString(
+			            battleInfo.getSelectedRobots(), 
+			            "sample.Corners,sample.Fire,sample.Target,sample.Walls");
+
+			    
+			    
+			    Integer numRounds = battleInfo.getNumRounds();
+			    Double coolRates = battleInfo.getGunCoolingRate();
+			    Long inactiveTime = battleInfo.getInactivityTime();
+			    
+			    
+                if (numRounds != null) {
+                    battleProperties.setNumRounds(numRounds);
+                }
+
+                if (coolRates != null) {
+                    battleProperties.setGunCoolingRate(coolRates);
+                }
+
+                if (inactiveTime != null) {
+                    battleProperties.setInactivityTime(inactiveTime);
+                }
+			    
+			}
+			
+            battleProperties.setSelectedRobots(selectedRobots);
+			
+			
+			/* 
+			 * Border Sentry and Hide Enemy Name properties are not available for 
+			 * current version of RoboCode 
+			 * */
+//            String borderSize = getParameter(Constants.BATTLE_SENTRY_BORDER_SIZE); 
+//            String hideEnemyName = getParameter(Constants.BATTLE_HIDE_ENEMY_NAME); 
+
+			LogUtil.log(battleProperties.toString());
+			manager.getBattleManager().startNewBattle(battleProperties, Constants.EXIT_ON_COMPLETE, Constants.NO_REPLAY);
 			//manager.getBattleManager().getBattle().setDesiredTPS(tps);
 			
 			
@@ -144,6 +234,7 @@ public class Robocode extends JApplet{
 			return null;
 		}
 	}
+	
 
 	
 }

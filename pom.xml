@@ -4,6 +4,8 @@
   <artifactId>RobocodeV1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  
+  <!-- Build Information -->
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
@@ -32,6 +34,8 @@
       </plugin>
     </plugins>
   </build>
+  
+  
   <dependencies>
   	<dependency>
   		<groupId>antlr</groupId>
@@ -73,10 +77,11 @@
     	<artifactId>jackson-core</artifactId>
     	<version>2.9.1</version>
 	</dependency>
+	
 	<dependency>
     	<groupId>org.codehaus.jackson</groupId>
     	<artifactId>jackson-core-asl</artifactId>
-   	 <version>1.9.2</version>
+   	 <version>1.9.13</version>
 	</dependency>
 	
   	<dependency>

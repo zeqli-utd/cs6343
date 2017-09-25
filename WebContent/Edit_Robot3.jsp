@@ -5,7 +5,7 @@
 <%
 	ResultSet resultset = null;
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -84,13 +84,13 @@
 	<script type="text/javascript">
 						
 		function Compile() {
-			var x =editor.getValue();
+			var sourceCode = editor.getValue();
 			var y = document.getElementById("displayrobots").value;
 			var z = document.getElementById("package").value;
 			$.ajax({
 				url : 'compileservlet',
 				type : 'POST',
-				data : "RobotCode=" + y +"blah" + z,
+				data : { "code" : sourceCode },
 				async : false,
 				success : function(html) {
 					editor.getSession().setValue(html);
@@ -234,8 +234,7 @@
 								
 						</select> <br /> 
 						<script type="text/javascript">
-							function RobotNames(value)
-							{
+							function RobotNames(value) {
 							    
 								   var x = document.getElementById("domain_name").value;
 							       	 var y = document.getElementById("package").value;

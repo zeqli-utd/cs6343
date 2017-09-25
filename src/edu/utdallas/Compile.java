@@ -18,6 +18,15 @@ public class Compile{
 //	static Map<String, byte[]> compiledClass=new HashMap<>();
 //	static Map<String, Map> path=new HashMap<>();
 	
+    /**
+     * Compile Robocode 
+     * @param packageName
+     * @param className
+     * @param src
+     * @param webRoot
+     * @return
+     * @throws Exception
+     */
 	public static byte[] compile(String packageName,String className,String src,String webRoot)throws Exception{
 		JavaCompiler compiler=ToolProvider.getSystemJavaCompiler();
 		DiagnosticCollector<JavaFileObject> diagnosticCollector=new DiagnosticCollector<>();

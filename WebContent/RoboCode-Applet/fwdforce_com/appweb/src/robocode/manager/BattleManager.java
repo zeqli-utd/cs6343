@@ -159,6 +159,8 @@ public class BattleManager {
 		}
 		startNewBattle(battlingRobotsList, exitOnComplete, replay, null);
 	}
+	
+	
 	public void startNewBattle1(BattleProperties battleProperties, boolean exitOnComplete, boolean replay) {
 		this.battleProperties = battleProperties;
 

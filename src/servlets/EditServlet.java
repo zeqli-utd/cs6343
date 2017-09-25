@@ -65,7 +65,6 @@ public class EditServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		System.out.println("Hi");
 		HttpSession session = request.getSession();
 		RobotDTO robotDTO = new RobotDTO();
@@ -125,9 +124,13 @@ public class EditServlet extends HttpServlet {
 			Robocode = new String(bytes);*/
 			//System.out.println("Robocode is "+Robocode);
 			while(resultSet.next()){
-				Robocode=resultSet.getString("RobotCode");
+				Robocode = resultSet.getString("RobotCode");
 				robotAccessDTO.setFilePath(resultSet.getString("filepath"));
 			}
+			
+			
+			
+			
 			session.setAttribute("RobObj", robotAccessDTO);
 			//System.out.println("Robocode blah:"+Robocode);
 			session.setAttribute("robocode", Robocode);

@@ -74,8 +74,9 @@ public class Robocode1 extends JApplet{
 	public static void main(String[] args) {
 
 		Robocode robocode = new Robocode();
-		robocode.initialize(new String[0]);
+//		robocode.initialize(new String[0]);
 	}
+	
 	@Override
 	public void init() {
 		 setSize( 800, 600);

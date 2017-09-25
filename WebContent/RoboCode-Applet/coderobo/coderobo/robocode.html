@@ -1,17 +1,30 @@
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE>
 <html lang="en-US">
   <head>
     <title>Robocode Battle</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
     <script language="javascript">
+    function getBattleInfo() {
+    	return {    	   
+					numRounds : 15,    	    
+    	    gunCoolingRate : 0.5,
+    	    inactivityTime : 500,
+    	    selectedRobots : "sample.Corners,sample.Fire,sample.Target,sample.Walls,sample.Crazy"
+    	};
+    }
    
     function writeSummary(summary) {
         summaryElem =
             document.getElementById("summary");
         summaryElem.innerHTML += "<br>";
         summaryElem.innerHTML += summary;
+    }
+    
+    function aLog(msg) {
+    	console.log("A Log Called");
+    	console.log(msg);
     }
     </script>
   </head>
@@ -33,6 +46,7 @@
         archive = "applet7.jar"
         width = 800,
         height = 600 >
+        <param name="java_arguments" value="-J-Djava.security.policy==my.policy -Djava.security.policy==my.policy "/>
         </applet><!--   codebase = "." -->
   </body>
 </html>

@@ -214,4 +214,24 @@ public class BattleProperties {
 		selectedRobots = props.getProperty(BATTLE_SELECTEDROBOTS, "");
 		initialPositions = props.getProperty(BATTLE_INITIAL_POSITIONS, "");
 	}
+	
+	@Override
+	public String toString() {
+	    return String.format("battleProperty: {"
+	            + "\"battlefieldWidth\" : %d,"
+	            + "\"battlefieldHeight\" : %d,"
+	            + "\"gunCoolingRate\" : %f,"
+	            + "\"inactivityTime\" : %d,"
+	            + "\"numRounds\" : %d,"
+	            + "\"selectedRobots\" : %s,"
+	            + "\"initialPositions\" : %s,"
+	            + "}",  
+	            battlefieldWidth,
+	            battlefieldHeight,
+	            gunCoolingRate,
+	            inactivityTime,
+	            numRounds,
+	            selectedRobots,
+	            initialPositions);	    
+	}
 }

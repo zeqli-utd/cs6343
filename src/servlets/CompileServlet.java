@@ -33,22 +33,22 @@ public class CompileServlet extends HttpServlet {
 		super();
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//String robotCode = (String)request.getAttribute("robocode");
 		System.out.println("Inside compile servlet");
 		HttpSession session = request.getSession();
 		RobotDTO robotDTO = null;
-		String RobotCode=null,selectedItem = null,robotID=null, packageID=null;
+		String RobotCode=null, selectedItem = null, robotID=null, packageID=null;
 
 		/*if (request.getParameter("RobotCode") != null) {
 			selectedItem = request.getParameter("RobotCode");
 		}
 		String[] words = selectedItem.split("blah");*/
 		
+		/* Read Robocode DTO from session. */
 		robotDTO = (RobotDTO) session.getAttribute("RobObj");
-		packageID=robotDTO.getPackageId();
-		robotID=robotDTO.getRobotName();
-		RobotCode = request.getParameter("textArea");
+		packageID = robotDTO.getPackageId();
+		robotID = robotDTO.getRobotName();
+		RobotCode = request.getParameter("code");
 		System.out.println("Info "+packageID+" "+robotID);
 		//RobotCode =words[2];
 		//robotName = words[0];
