@@ -101,9 +101,36 @@ public class RobocodeClassLoader extends ClassLoader {
 	}
 	public synchronized Class<?> loadSampleRobotClass(String name, boolean toplevel) throws ClassNotFoundException {
 		log("RobocodeClassLoader > loadSampleRoboClass() " + name);
-		Class<?> c = Class.forName(name);
+
+        URL jarUrl = null;
+        try {
+            jarUrl = new URL("jar", "", FileUtil.getCodeBaseUrl().toString() + "robots.jar!/");
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+		ClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl});
+		Class<?> c = Class.forName(name, true, classLoader);
 		log("robot class loaded "+ (c != null ? "successfully" : "failed"));
 		return c;
+	}
+	
+	/**
+	 * Load robot from jar
+	 * @param name
+	 * @param toplevel
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
+	public synchronized Class<?> loadJarRobotClass(String name, boolean toplevel) throws ClassNotFoundException {
+	       log("RobocodeClassLoader > loadJarRobotClass() " + name);
+	       
+	       ClassLoader loader = new URLClassLoader(new URL[] {FileUtil.getUrl()});
+	       
+	        Class<?> c = Class.forName(name);
+	        log("robot class loaded "+ (c != null ? "successfully" : "failed"));
+	        return c;
 	}
 	
 	
@@ -164,6 +191,15 @@ public class RobocodeClassLoader extends ClassLoader {
 		return loadSampleRobotClass(name, toplevel);
 	}
 		
+	/**
+	 * 1. Convert foo.bar class name to foo/bar.class
+	 * 2. Read class path from robotSpecification 
+	 * 3. Concatenate above path and file name to: classpath/foo/bar.class
+	 * @param name
+	 * @param toplevel
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
 	public synchronized Class<?> loadRobotClass1(String name, boolean toplevel) throws ClassNotFoundException {
 			
 		if (cachedClasses.containsKey(name)) {
@@ -190,6 +226,7 @@ public class RobocodeClassLoader extends ClassLoader {
 
 		String filename = name.replace('.', File.separatorChar) + ".class";
 
+		/* Get robot classpath, either directory or jar */
 		String classPath = robotSpecification.getRobotClassPath();
 		LogUtil.log(classPath);
 
@@ -225,7 +262,7 @@ public class RobocodeClassLoader extends ClassLoader {
 
 		try {
 			FileInputStream fis = new FileInputStream(f);
-			DataInputStream dis = new DataInputStream(fis);
+			DataInputStream dis = new DataInputStream(fis);  // Process Java Primitive Type
 
 			dis.readFully(buff);
 			dis.close();

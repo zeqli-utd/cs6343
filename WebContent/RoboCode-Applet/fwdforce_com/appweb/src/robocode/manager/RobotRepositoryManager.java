@@ -270,9 +270,14 @@ public class RobotRepositoryManager {
 		}
 	}
 
+	/**
+	 * Robots repository path 
+	 * @return
+	 */
 	public File getRobotsDirectory() {
 		if (robotsDirectory == null) {
 			robotsDirectory = FileUtil.getRobotsDir();
+			
 		}
 		return robotsDirectory;
 	}
@@ -554,6 +559,16 @@ public class RobotRepositoryManager {
 		return 16;
 	}
 
+	/**
+	 * Extract jar to destination directory
+	 * @param jarIS
+	 * @param dest
+	 * @param statusPrefix
+	 * @param extractJars
+	 * @param close
+	 * @param alwaysReplace
+	 * @return
+	 */
 	public int extractJar(JarInputStream jarIS, File dest, String statusPrefix, boolean extractJars, boolean close,
 			boolean alwaysReplace) {
 		int rc = 0;
