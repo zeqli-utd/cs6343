@@ -6,7 +6,7 @@ package com.DAO;
 	public class ConnectionFactory {
 		String driverClassName = "com.mysql.jdbc.Driver";
 		String connectionUrl = "jdbc:mysql://localhost:3306/test";
-		String dbUser = "root";
+		String dbUser = "cloud";
 		String dbPwd = "estherrules1418";
 
 		private static ConnectionFactory connectionFactory = null;

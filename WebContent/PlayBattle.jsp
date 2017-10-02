@@ -119,8 +119,8 @@ function getValueFromApplet(){
 				try {
 					String connectionURL = "jdbc:mysql://localhost:3306/robocode";
 					Class.forName("com.mysql.jdbc.Driver").newInstance();
-					Connection connection = DriverManager.getConnection(connectionURL, "root",
-							"root");
+					Connection connection = DriverManager.getConnection(connectionURL, "cloud",
+							"cloud");
 
 					Statement statement = connection.createStatement();
 					String selectString="SELECT userID, packageID, robotID from robot";

@@ -56,14 +56,14 @@
       <init-param>
           <param-name>AcsPrincipalId</param-name>
           <param-value>00000001-0000-0000-c000-000000000000</param-value>
-      </init-param>
-            
+      </init-param>      
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>requestHandler</servlet-name>
 		<url-pattern>/requestHandler</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
+		<welcome-file>welcome.jsp</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>

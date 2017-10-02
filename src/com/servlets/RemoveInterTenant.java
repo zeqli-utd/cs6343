@@ -40,7 +40,7 @@ public class RemoveInterTenant extends HttpServlet{
 	        	}
 
 	        }
-	        System.out.println("The inter_tenant is" + inter_tenant);
+	        System.out.println("The inter_tenant is " + inter_tenant);
 			System.out.println("the length of rows " + req.getParameter("numOfRows"));
 			String num_rows = req.getParameter("numOfRows");
 			Integer nr = Integer.parseInt(num_rows);
