@@ -464,6 +464,9 @@ public class Battle implements Runnable {
 		this.desiredTPS = desiredTPS;
 	}
 
+	/**
+	 * Initialize battle runtime. 
+	 */
 	public void initialize() {
 	    log("Initialize Battle...");
 		setOptions();
@@ -515,9 +518,9 @@ public class Battle implements Runnable {
 		synchronized (robots) {
 			for (RobotPeer r : robots) {
 				try {
-					Class<?> c;log("-2");
+					Class<?> c;
 
-					RobotClassManager classManager = r.getRobotClassManager();log("-1");
+					RobotClassManager classManager = r.getRobotClassManager();
 					String className = classManager.getFullClassName();
 					log("className " + className);
 //					log("security " + RobotClassManager.isSecutityOn());
@@ -526,7 +529,6 @@ public class Battle implements Runnable {
 					//TODO Change here
 					c = classLoader.loadSampleRobotClass(className, true);
 					log((c==null) + " class loader");
-                    log("4");
 					
 					/*if (RobotClassManager.isSecutityOn()) {
 						c = classLoader.loadRobotClass(className, true);
@@ -535,10 +537,8 @@ public class Battle implements Runnable {
 					}*/
 
 					classManager.setRobotClass(c);
-                    log("5");
 
 					r.getRobotFileSystemManager().initializeQuota();
-                    log("6");
 
 					Class<?>[] interfaces = c.getInterfaces();
 

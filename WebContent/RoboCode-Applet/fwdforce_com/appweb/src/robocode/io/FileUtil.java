@@ -40,6 +40,9 @@ public class FileUtil {
 	// Current working directory
 	private static File cwd;
 	private static URL url;
+	private static URL codeBaseUrl;
+	private static URL docBaseUrl;
+	
 	public static URL getUrl() {
 		return url;
 	}
@@ -211,18 +214,6 @@ public class FileUtil {
 	}
 
 	/**
-	 * Returns the directory containing the robots.
-	 *
-	 * @return a File that is the directory containing the robots
-	 */
-	public static File getRobotsDir() {
-		LogUtil.log("/robots aasd"+new File("/robots").getAbsolutePath());
-		File f = new File("/robots");
-		LogUtil.log(f.getAbsolutePath());
-		return createDir(f);
-	}
-
-	/**
 	 * Returns the directory containing the configuration files.
 	 * If the directory does not exist, it will be created automatically.
 	 *
@@ -258,4 +249,39 @@ public class FileUtil {
 	public static File getCompilerConfigFile() {
 		return new File(getConfigDir(), "compiler.properties");
 	}
+	
+	
+
+    /**
+     * Returns the directory containing the robots.
+     *
+     * @return a File that is the directory containing the robots
+     */
+    public static File getRobotsDir() {
+        LogUtil.log("/robots aasd"+new File("/robots").getAbsolutePath());
+        File f = new File("/robots");
+        LogUtil.log(f.getAbsolutePath());
+        return createDir(f);
+    }
+
+    public static URL getCodeBaseUrl() {
+        return codeBaseUrl;
+    }
+
+    public static void setCodeBaseUrl(URL codeBaseUrl) {
+        FileUtil.codeBaseUrl = codeBaseUrl;
+    }
+
+    public static URL getDocBaseUrl() {
+        return docBaseUrl;
+    }
+
+    public static void setDocBaseUrl(URL docBaseUrl) {
+        FileUtil.docBaseUrl = docBaseUrl;
+    }
+    
+    
+    
+    
+
 }

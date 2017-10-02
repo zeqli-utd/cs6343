@@ -138,9 +138,12 @@ public class Robocode extends JApplet{
 //	            e.printStackTrace(System.out);
 //	        }
 //	    }
-    	
+    	System.out.println("[ Debug] document base url " + getDocumentBase());
+    	System.out.println("[ Debug] code base url " + getCodeBase());
 		URL url = getDocumentBase();
 		FileUtil.setUrl(getCodeBase());
+		FileUtil.setCodeBaseUrl(getCodeBase());
+		FileUtil.setDocBaseUrl(getDocumentBase());
 		
 		/* The browser window object */
 		JSObject window = null;
@@ -156,8 +159,8 @@ public class Robocode extends JApplet{
         LogUtil.log("codebase url:: " + url.getFile());
         LogUtil.log(url.getFile());
         
-        BattleVO battleMeta = (BattleVO)window.eval("getBattleInfo()");
-		JPanel newContentPane = initialize(new String[0], battleMeta); 
+//        BattleVO battleMeta = (BattleVO)window.eval("getBattleInfo()");
+		JPanel newContentPane = initialize(new String[0], null); 
 		setContentPane(newContentPane); 
 	}
 	
@@ -177,6 +180,7 @@ public class Robocode extends JApplet{
 	        
 			/* Set Battle Specifications */
 			BattleProperties battleProperties = manager.getBattleManager().getBattleProperties();
+			
 			
 			String selectedRobots = null;
 			if (battleInfo != null) {
@@ -203,6 +207,8 @@ public class Robocode extends JApplet{
                     battleProperties.setInactivityTime(inactiveTime);
                 }
 			    
+			} else {
+			    selectedRobots = "sample.Corners,sample.Fire,sample.Target,sample.Walls";
 			}
 			
             battleProperties.setSelectedRobots(selectedRobots);

@@ -142,6 +142,12 @@ public class BattleManager {
 		startNewBattle(battleProperties, false, true);
 	}
 
+	/**
+	 * Our version of battle 
+	 * @param battleProperties
+	 * @param exitOnComplete
+	 * @param replay
+	 */
 	public void startNewBattle(BattleProperties battleProperties, boolean exitOnComplete, boolean replay) {
 		this.battleProperties = battleProperties;
 
