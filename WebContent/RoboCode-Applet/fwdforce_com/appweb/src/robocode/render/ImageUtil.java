@@ -34,41 +34,65 @@ import static robocode.util.Utils.isNear;
  * @author Flemming N. Larsen (original)
  */
 public class ImageUtil {
+    
 
-	/**
-	 * Returns an image resource.
-	 *
-	 * @param filename the filename of the image to load
-	 * @return the loaded image
-	 */
-	public static Image getImage(String filename) {
-		
-		URL url = null;
-		try {
-		//	 url = ClassLoader.class.getResource(filename);
-			if(filename.startsWith("/"))
-				filename = filename.substring(1);
-			url = new URL(FileUtil.getUrl(),filename);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		if (url == null) {
-			Logger.log("Could not load image because of invalid filename: " + filename);
-			LogUtil.log("Could not load image because of invalid filename: " + filename);
-			return null;
-		}
+    /**
+     * Returns an image resource.
+     *
+     * @param filename the filename of the image to load
+     * @return the loaded image
+     */
+    public static Image getImage(String filename) {
 
-		try {
-			return ImageIO.read(url);
-		} catch (Exception e) {
-			Logger.log("Could not load image: " + filename);
-			LogUtil.log("Could not load image: " + filename);
-			return null;
-		}
-		//return null;
-	}
+        URL url = ImageUtil.class.getResource(filename);
+
+        if (url == null) {
+            Logger.log("Could not load image because of invalid filename: " + filename);
+            return null;
+        }
+
+        try {
+            return ImageIO.read(url);
+        } catch (Exception e) {
+            Logger.log("Could not load image: " + filename);
+            return null;
+        }
+    }
+
+//	/**
+//	 * Returns an image resource.
+//	 *
+//	 * @param filename the filename of the image to load
+//	 * @return the loaded image
+//	 */
+//	public static Image getImage(String filename) {
+//		
+//		URL url = null;
+//		try {
+//		//	 url = ClassLoader.class.getResource(filename);
+//			if(filename.startsWith("/"))
+//				filename = filename.substring(1);
+//			url = new URL(FileUtil.getUrl(),filename);
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		
+//		if (url == null) {
+//			Logger.log("Could not load image because of invalid filename: " + filename);
+//			LogUtil.log("Could not load image because of invalid filename: " + filename);
+//			return null;
+//		}
+//
+//		try {
+//			return ImageIO.read(url);
+//		} catch (Exception e) {
+//			Logger.log("Could not load image: " + filename);
+//			LogUtil.log("Could not load image: " + filename);
+//			return null;
+//		}
+//		//return null;
+//	}
 
 	/**
 	 * Create a copy of an robot image into a coloured robot image. The colors of the

@@ -27,6 +27,7 @@ package robocode;
 
 
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.security.AccessController;
@@ -138,12 +139,20 @@ public class Robocode extends JApplet{
 //	            e.printStackTrace(System.out);
 //	        }
 //	    }
-    	System.out.println("[ Debug] document base url " + getDocumentBase());
-    	System.out.println("[ Debug] code base url " + getCodeBase());
 		URL url = getDocumentBase();
 		FileUtil.setUrl(getCodeBase());
 		FileUtil.setCodeBaseUrl(getCodeBase());
-		FileUtil.setDocBaseUrl(getDocumentBase());
+		try {
+		    String file = getParameter("robots_path");
+		    LogUtil.log("[ Debug] File Path: " + file);
+            FileUtil.setCodeBaseUrl(new URL("file", "", getParameter("robots_path")));
+            //FileUtil.setCodeBaseUrl(new URL(getCodeBase().getProtocol(), getCodeBase().getHost(), getCodeBase().getPort(), getParameter("robots_path")));
+            
+            LogUtil.log("[ Debug] New code base url " + FileUtil.getCodeBaseUrl().toExternalForm()); 
+        } catch (MalformedURLException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
 		
 		/* The browser window object */
 		JSObject window = null;
@@ -154,13 +163,16 @@ public class Robocode extends JApplet{
 		}
         String summary = "hello world";
         LogUtil.setWindow(window);
+
+        LogUtil.log("[ Debug] document base url " + getDocumentBase());
+        LogUtil.log("[ Debug] code base url " + getCodeBase());
         LogUtil.log(summary);
-        LogUtil.aLog(summary);
-        LogUtil.log("codebase url:: " + url.getFile());
         LogUtil.log(url.getFile());
         
 //        BattleVO battleMeta = (BattleVO)window.eval("getBattleInfo()");
-		JPanel newContentPane = initialize(new String[0], null); 
+        BattleVO battleMate = new BattleVO();
+        battleMate.setSelectedRobots(getParameter("selected_robots"));
+		JPanel newContentPane = initialize(new String[0], battleMate); 
 		setContentPane(newContentPane); 
 	}
 	
@@ -208,7 +220,8 @@ public class Robocode extends JApplet{
                 }
 			    
 			} else {
-			    selectedRobots = "sample.Corners,sample.Fire,sample.Target,sample.Walls";
+//			    selectedRobots = "sample.Corners,sample.Fire,sample.Target,sample.Walls";
+                selectedRobots = "sample.ABC,sample.NidhiFirst";
 			}
 			
             battleProperties.setSelectedRobots(selectedRobots);

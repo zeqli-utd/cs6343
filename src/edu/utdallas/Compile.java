@@ -23,7 +23,7 @@ public class Compile{
      * @param packageName
      * @param className
      * @param src
-     * @param webRoot
+     * @param webRoot /robocode.jar
      * @return
      * @throws Exception
      */

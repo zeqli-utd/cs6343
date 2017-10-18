@@ -102,15 +102,19 @@ public class RobocodeClassLoader extends ClassLoader {
 	public synchronized Class<?> loadSampleRobotClass(String name, boolean toplevel) throws ClassNotFoundException {
 		log("RobocodeClassLoader > loadSampleRoboClass() " + name);
 
+		ClassLoader prevCl = Thread.currentThread().getContextClassLoader();
         URL jarUrl = null;
-        try {
-            jarUrl = new URL("jar", "", FileUtil.getCodeBaseUrl().toString() + "robots.jar!/");
-        } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+            try {
+                jarUrl = new URL("jar", "", FileUtil.getCodeBaseUrl().toString() + "!/");
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            LogUtil.log("[  Debug] Jar URL: " + jarUrl.toString());
 
-		ClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl});
+
+		ClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl}, prevCl);
+		LogUtil.log("[  Debug] Parent Classloader: " + classLoader.getParent().getClass().getName());
 		Class<?> c = Class.forName(name, true, classLoader);
 		log("robot class loaded "+ (c != null ? "successfully" : "failed"));
 		return c;
