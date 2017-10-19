@@ -53,6 +53,38 @@ public class Compile{
 			return fileManager.getClassBytes();
 		}
 	}
+	
+	//
+	public static void complieToJar(List<String> className, List<String> src, String path) {
+		try {
+			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler(); 
+			DiagnosticCollector<JavaFileObject> diagnosticCollector = new DiagnosticCollector<>(); 
+			InMemoryFileManager fileManager = new InMemoryFileManager(compiler.getStandardFileManager(diagnosticCollector, null, null)); 
+			List<String> options = new ArrayList<String>(); 
+			options.addAll(Arrays.asList("-classpath", path + "robots.jar")); 
+			List<JavaFileObject> java_file = new ArrayList<>(); 
+			for(int i = 0;i < className.size(); i++) {
+				String name = className.get(i); 
+				String srcFile = src.get(i); 
+				java_file.add(new SimpleJavaFileObj(name, srcFile)); 
+			}
+			Iterable<? extends JavaFileObject> unit = java_file; 
+			JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnosticCollector, options, null, unit); 
+			boolean success = task.call();
+			System.out.println("Compliation " + (success ? "is successful. " : "failed!")); 
+			for(Diagnostic d : diagnosticCollector.getDiagnostics()) {
+				System.out.println(d.getCode()); 
+				System.out.println(d.getKind()); 
+				System.out.println(d.getPosition()); 
+				System.out.println(d.getStartPosition()); 
+				System.out.println(d.getEndPosition()); 
+				System.out.println(d.getSource()); 
+				System.out.println(d.getMessage(null));
+			}
+		}catch(Exception e) {
+			e.printStackTrace(System.err); 
+		}
+	}
 
 //	protected void doGet(javax.servlet.http.HttpServletRequest request,javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException{
 //		ByteArrayOutputStream baos=new ByteArrayOutputStream();
